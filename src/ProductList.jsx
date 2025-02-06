@@ -252,8 +252,12 @@ const handlePlantsClick = (e) => {
     e.preventDefault();
     setShowCart(false);
   };
-  const handleAddToCart = (e) => {
+  const handleAddToCart = (e,index) => {
     dispatch(addItem(e));
+    console.log(index)
+    let button = document.getElementById("button" + index)
+    button.disabled = true;
+    button.style.backgroundColor="gray";
     
     setAddedToCart((prevState) => ({
         ...prevState,
@@ -296,8 +300,7 @@ const handlePlantsClick = (e) => {
                                 <img className="product-image" src={plant.image}></img>
                                 <div className="product-description">{plant.description}</div>
                                 <div className="product-cost">{plant.cost}</div>
-                                <button className="product-button" onClick={() => handleAddToCart(plant)}>Add To Cart</button>
-
+                                <button className="product-button" id= {"button" + index} onClick={() => handleAddToCart(plant,index)}>Add To Cart</button>
                             </div>
                         ))}
                     </div>
