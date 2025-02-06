@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const CartSlice = createSlice({
   name: 'cart',
   initialState: {
+    writable:true,
     items: [], // Initialize items as an empty array
   },
   reducers: {
