@@ -311,7 +311,7 @@ const handlePlantsClick = (e) => {
                                 <img className="product-image" src={plant.image}></img>
                                 <div className="product-description">{plant.description}</div>
                                 <div className="product-cost">{plant.cost}</div>
-                                <button className="product-button" disabled={cartAdd[plant.name]} id= {"button" + index} onClick={() => handleAddToCart(plant,index)} style={{backgroundColor: cartAdd[plant.name] ? "gray" : "green"}}>Add To Cart</button>
+                                <button className="product-button" disabled={cartAdd[plant.name]} id= {"button" + index} onClick={() => handleAddToCart(plant,index)} style={{backgroundColor: cartAdd[plant.name] ? "gray" : "green"}}>{ cartAdd[plant.name] ? "Added To Cart" : "Add To Cart"}</button>
                             </div>
                         ))}
                     </div>
