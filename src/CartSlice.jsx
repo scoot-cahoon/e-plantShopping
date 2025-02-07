@@ -27,6 +27,7 @@ export const CartSlice = createSlice({
     removeItem: (state, action) => {
         const {name, image, cost} = action.payload;
         const existingItem = state.items.find(item => item.name === name)
+        console.log(existingItem.quantity)
          state.total =  state.total - existingItem.quantity
         if (existingItem){
             state.items = state.items.filter(item => item.name !== name);
