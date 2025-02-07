@@ -2,15 +2,16 @@ import React, { useState,useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
 import { useSelector, useDispatch } from "react-redux";
-import { addItem } from './CartSlice';
+import { addItem, updateState, addToCart} from './CartSlice';
 
 function ProductList() {
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [addedToCart, setAddedToCart] = useState({});
+    const [grayButton, setGrayButton] = useState({});
     const [cartTotal, setCartTotal] = useState(0);
     const dispatch = useDispatch();
-
+    const cartAdd = useSelector(state => state.cart.addedTocart);
     const plantsArray = [
         {
             category: "Air Purifying Plants",
@@ -252,17 +253,26 @@ const handlePlantsClick = (e) => {
     e.preventDefault();
     setShowCart(false);
   };
+  const handleCartAdd = (e) =>{
+    dispatch(addToCart(e.name))
+  }
   const handleAddToCart = (e,index) => {
     dispatch(addItem(e));
     console.log(index)
     let button = document.getElementById("button" + index)
-    button.disabled = true;
-    button.style.backgroundColor="gray";
-    
-    setAddedToCart((prevState) => ({
-        ...prevState,
-        [e.name]: true, // Set the product name as key and value as true to indicate it's added to cart
-      }));
+    dispatch(updateState(e.name))
+    // button.disabled = true;
+    // button.style.backgroundColor="gray";
+
+    // setGrayButton((prevSate) =>({
+    //     ...prevSate,
+    //         [index]: "gray",
+    // }))
+    // setAddedToCart((prevState) => ({
+    //     ...prevState,
+    //     [index]: true, // Set the product name as key and value as true to indicate it's added to cart
+    //   }));
+      console.log(addedToCart[index])
 
   }
     return (
@@ -296,11 +306,12 @@ const handlePlantsClick = (e) => {
                     <div className='product-list'>
                         {cat.plants.map((plant, index) => (
                             <div className='product-card' key={index}>
+                                {handleCartAdd(plant)}
                                 <h2 className="product-title">{plant.name}</h2>
                                 <img className="product-image" src={plant.image}></img>
                                 <div className="product-description">{plant.description}</div>
                                 <div className="product-cost">{plant.cost}</div>
-                                <button className="product-button" id= {"button" + index} onClick={() => handleAddToCart(plant,index)}>Add To Cart</button>
+                                <button className="product-button" disabled={cartAdd[plant.name]} id= {"button" + index} onClick={() => handleAddToCart(plant,index)} style={{backgroundColor: cartAdd[plant.name] ? "gray" : "green"}}>Add To Cart</button>
                             </div>
                         ))}
                     </div>
