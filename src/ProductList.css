@@ -3,7 +3,21 @@ body, h1, ul {
     margin: 0;
     padding: 0;
 }
-
+/* Cart Values*/
+.container{
+    position:relative;
+    text-align: center;
+    color: white;
+}
+.centered{
+    position: absolute;
+    max-width:22.25px;
+    top: 35%;
+    right: 35%;
+    /* transform: translate(-50%,-50%);
+    justify-content: center;
+    align-items: center; */
+}
 /* Set a background color */
 body {
     font-family: Arial, sans-serif;
