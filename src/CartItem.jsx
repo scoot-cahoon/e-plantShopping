@@ -33,11 +33,12 @@ const CartItem = ({ onContinueShopping }) => {
 
   const handleDecrement = (item) => {
     let i = item.quantity - 1;
-    dispatch(updateTotal(false));
+   
     if(i == 0){
         handleRemove(item)
     }
     else{
+        dispatch(updateTotal(false));
         dispatch(updateQuantity({item,i}))
     }
     
